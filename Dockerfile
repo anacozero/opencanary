@@ -10,5 +10,6 @@ RUN pip install scapy pcapy
 COPY run.sh /bin/run
 RUN chmod +x /bin/run
 
-CMD /bin/run
+ENTRYPOINT ["/bin/run"]
 
+CMD ["tail", "-f", "/var/tmp/opencanary.log"]
