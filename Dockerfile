@@ -1,16 +1,14 @@
 FROM python:3.6-buster
 
-RUN mkdir -p /opencanary
+WORKDIR /root/
 
-COPY bin /opencanary/bin
-COPY data /opencanary/data
-COPY opencanary /opencanary/opencanary
-COPY docs /opencanary/docs
-COPY LICENSE /opencanary/LICENSE
-COPY requirements.txt /opencanary/requirements.txt
-COPY setup.py /opencanary/setup.py
+RUN apt update &&\
+	 apt-get install -y sudo vim build-essential libssl-dev libffi-dev python-dev libpcap-dev
+RUN pip install rdpy
+RUN pip install opencanary
+RUN pip install scapy pcapy 
+COPY run.sh /bin/run
+RUN chmod +x /bin/run
 
-WORKDIR /opencanary
-
-RUN pip install -r requirements.txt
+CMD /bin/run
 
