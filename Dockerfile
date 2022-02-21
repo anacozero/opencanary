@@ -8,6 +8,7 @@ RUN pip install rdpy
 RUN pip install opencanary
 RUN pip install scapy pcapy 
 COPY run.sh /bin/run
+COPY conf/opencanary.conf /etc/opencanaryd/opencanary.conf
 RUN chmod +x /bin/run
 
 ENTRYPOINT ["/bin/run"]
